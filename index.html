@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+            <title>Trivia game</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width">
+            <link rel="stylesheet" href="assets/css/style.css">
+
+    </head>       
+
+    <body>
+
+        <div class="content">
+           
+            <h1>Trivia Game</h1>
+            <button id="startGame">Start Game</button>
+            <h3>Timer: <div id="timer">00</div></h3>
+            <h3>Question: <div id="question">This is test question?</div></h3>
+            <div id="column1"></div>
+            <div id="column2">
+           
+                    <input type="radio" name="answer" value="choice1"><span id="choice1"></span><br><br>
+                    <input type="radio" name="answer" value="choice2"><span id="choice2"></span><br><br>
+                    <input type="radio" name="answer" value="choice3"><span id="choice3"></span><br><br>
+                    <input type="radio" name="answer" value="choice4"><span id="choice4"></span><br><br>
+              
+            </div>
+            <div id="column3"></div>
+
+            <div class="submit"><button id="submit">Submit</button></div>
+
+            <div><h3>Wins: <span id="wins">0</span></h3></div>
+            <div><h3>Losses: <span id="losses">0</span></h3></div>
+
+        </div>     
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="assets/javascript/app.js"></script>
+
+    </body>
+</html>

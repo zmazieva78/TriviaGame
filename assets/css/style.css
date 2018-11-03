@@ -1,0 +1,53 @@
+body {
+    background-image: url("../images/background.jpg");
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.content {
+    align-content: center;
+    width: 960px;
+    margin: auto;
+    text-align: center;
+    background-color: rgb(236, 222, 141);
+    height: 680px;
+    border: solid;
+    border-color: rgb(82, 4, 4);
+}
+h1 {
+    font-weight: bold;
+    font-size: 52px;
+    text-align: center;
+    color: rgb(236, 33, 6);
+}
+h3 {
+    font-size: 25px;
+}
+#startGame {
+    padding: 5px;
+    font-size: 22px;
+}
+p {
+    font-size: 18px;
+    font-style: italic;
+}
+#column1, #column3 {
+    width: 30%;
+    float: left;
+    height: 150px;
+}
+#column2 {
+    width:35%;
+    float: left;
+    text-align: justify;
+    height: 150px;
+}
+#wins, #losses {
+    clear: both;
+}
+#submit {
+    padding: 5px;
+    font-size: 18px;
+    margin-top: 15px;
+}
+.submit {
+    clear: both;
+}
