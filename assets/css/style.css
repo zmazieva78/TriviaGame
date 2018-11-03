@@ -51,3 +51,7 @@ p {
 .submit {
     clear: both;
 }
+#question, #timer, #wins, #losses {
+    font-style: italic;
+    color: brown;
+}
