@@ -1,6 +1,9 @@
+const initialCountdown = 15;
 var currentQuestion;
 var wins = 0;
 var losses = 0;
+var countDown = initialCountdown;
+var timer;
 
 var questions = [
     {
@@ -100,10 +103,10 @@ function nextQuestion() {
         $("#choice2").text(currentQuestion.choices[1]);
         $("#choice3").text(currentQuestion.choices[2]);
         $("#choice4").text(currentQuestion.choices[3]);
-
         $('input[name=answer]').prop("checked", false);
 
         questions.splice(randomIndex, 1);
+
     } else {
         alert("No more questions.");
     }
@@ -111,7 +114,41 @@ function nextQuestion() {
 
 $("#startGame").click(function(){
     nextQuestion();
+    timer = setInterval(onTimer, 1000);
+    $("#timer").text(formatTime(countDown)); 
 });
+
+function onTimer() {
+    countDown--;
+    $("#timer").text(formatTime(countDown));
+    if (countDown == 0) {
+        clearInterval(timer);
+        losses++;
+        $("#losses").text(losses);
+        alert("Time is up! Correct answer: " + currentQuestion.choices[currentQuestion.correctChoice]);
+        nextQuestion();
+        timer = setInterval(onTimer, 1000);
+        countDown = initialCountdown;
+    }
+}
+
+function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var secs = seconds % 60;
+    var minutesStr;
+    if (minutes < 10) {
+        minutesStr = "0" + minutes;
+    } else {
+        minutesStr = minutes;
+    }
+    var secsStr;
+    if (secs < 10) {
+        secsStr = "0" + secs;
+    } else {
+        secsStr = secs;
+    }
+    return minutesStr + ":" + secsStr;
+}
 
 $("#submit").click(function(){
     var selectedChoice = $('input[name=answer]:checked').val();
@@ -161,4 +198,9 @@ $("#submit").click(function(){
     $("#losses").text(losses);
     
     nextQuestion();
+    clearInterval(timer);
+    timer = setInterval(onTimer, 1000);
+    countDown = initialCountdown;
+    $("#timer").text(formatTime(countDown));
+
 });
