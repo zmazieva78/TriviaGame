@@ -8,7 +8,7 @@ body {
     margin: auto;
     text-align: center;
     background-color: rgb(236, 222, 141);
-    height: 680px;
+    height: 700px;
     border: solid;
     border-color: rgb(82, 4, 4);
 }
@@ -30,12 +30,12 @@ p {
     font-style: italic;
 }
 #column1, #column3 {
-    width: 30%;
+    width: 40%;
     float: left;
     height: 150px;
 }
 #column2 {
-    width:35%;
+    width:20%;
     float: left;
     text-align: justify;
     height: 150px;
@@ -54,4 +54,11 @@ p {
 #question, #timer, #wins, #losses {
     font-style: italic;
     color: brown;
+}
+span {
+    font-size: 22px;
+    color: brown;
+}
+#Image {
+    padding-top: 15px;
 }

@@ -4,6 +4,7 @@ var wins = 0;
 var losses = 0;
 var countDown = initialCountdown;
 var timer;
+var totalAttempts = 11;
 
 var questions = [
     {
@@ -18,7 +19,7 @@ var questions = [
     },
     {
         question: "When a drink is served “on the rocks”, it is served with what?",
-        choices: ["Vodka", "Straws", "Whipped Cream","Ice Cubes"],
+        choices: ["Vodka", "Straws", "Whipped Cream", "Ice Cubes"],
         correctChoice: 3
 
     },
@@ -49,7 +50,7 @@ var questions = [
     {
         question: "Arby’s is a fast-food restaurant chain specializing in sandwiches made with what main ingredient?",
         choices: ["Roast beef", "Grilled Chicken", "Fish", "Pork"],
-        correctChoice: 1 
+        correctChoice: 1
 
     },
     {
@@ -72,19 +73,19 @@ var questions = [
     },
     {
         question: "“Granny Smith” is a popular type of which fruit?",
-        choices: ["Pear", "Peach", "Apple","Orange"],
+        choices: ["Pear", "Peach", "Apple", "Orange"],
         correctChoice: 2
 
     },
     {
         question: "Dijon mustard originated in the city of Dijon, located in what country?",
-        choices: ["France", "Germany", "Italy","Greece"],
+        choices: ["France", "Germany", "Italy", "Greece"],
         correctChoice: 0
 
     },
     {
-        question:"What was the original flavor of the filling in Twinkies?",
-        choices: ["Apples", "Blueberries", "Strawberry","Banana"],
+        question: "What was the original flavor of the filling in Twinkies?",
+        choices: ["Apples", "Blueberries", "Strawberry", "Banana"],
         correctChoice: 3
     },
     {
@@ -95,27 +96,55 @@ var questions = [
 ];
 
 function nextQuestion() {
-    if (questions.length > 0) {
-        var randomIndex = Math.floor(Math.random() * questions.length);
-        currentQuestion = questions[randomIndex];
-        $("#question").text(currentQuestion.question);
-        $("#choice1").text(currentQuestion.choices[0]);
-        $("#choice2").text(currentQuestion.choices[1]);
-        $("#choice3").text(currentQuestion.choices[2]);
-        $("#choice4").text(currentQuestion.choices[3]);
-        $('input[name=answer]').prop("checked", false);
+    totalAttempts--;
+    if (totalAttempts == 0) {
+        if (wins > losses) {
+            alert("You won!");
+        } else if (wins == losses) {
+            alert("It is tie!");
+        } else {
+            alert("You lost!");
+        }
 
-        questions.splice(randomIndex, 1);
+        window.location.reload(true);
 
     } else {
-        alert("No more questions.");
+        if (questions.length > 0) {
+            var randomIndex = Math.floor(Math.random() * questions.length);
+            currentQuestion = questions[randomIndex];
+            $("#question").text(currentQuestion.question);
+            $("#choice1").text(currentQuestion.choices[0]);
+            $("#choice2").text(currentQuestion.choices[1]);
+            $("#choice3").text(currentQuestion.choices[2]);
+            $("#choice4").text(currentQuestion.choices[3]);
+            $('input[name=answer]').prop("checked", false);
+
+            questions.splice(randomIndex, 1);
+
+        } else {
+            alert("No more questions.");
+        }
     }
 }
 
-$("#startGame").click(function(){
-    nextQuestion();
-    timer = setInterval(onTimer, 1000);
-    $("#timer").text(formatTime(countDown)); 
+$("#startGame").click(function () {
+    if ($("#startGame").text() == "Start Game") {
+        nextQuestion();
+        timer = setInterval(onTimer, 1000);
+        $("#timer").text(formatTime(countDown));
+        $("#startGame").text("Give up");
+        $("#Game").show();
+        $("#Image").hide();
+    } else {
+        losses++;
+        $("#losses").text(losses);
+        clearInterval(timer);
+        nextQuestion();
+        timer = setInterval(onTimer, 1000);
+        countDown = initialCountdown;
+        $("#timer").text(formatTime(countDown));
+    }
+
 });
 
 function onTimer() {
@@ -150,14 +179,14 @@ function formatTime(seconds) {
     return minutesStr + ":" + secsStr;
 }
 
-$("#submit").click(function(){
+$("#submit").click(function () {
     var selectedChoice = $('input[name=answer]:checked').val();
 
     if (selectedChoice == null) {
         alert("Please choose an answer.");
         return;
-    } 
-    
+    }
+
     if (selectedChoice == "choice1") {
         if (currentQuestion.correctChoice == 0) {
             alert("Correct");
@@ -190,13 +219,13 @@ $("#submit").click(function(){
             alert("Incorrect");
             losses++;
         }
-    } else { 
+    } else {
         losses++;
         alert("InCorrect");
     }
     $("#wins").text(wins);
     $("#losses").text(losses);
-    
+
     nextQuestion();
     clearInterval(timer);
     timer = setInterval(onTimer, 1000);
