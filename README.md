@@ -1,5 +1,5 @@
 # Trivia Game
-==========================
+
 ***Full Stack Coding Bootcamp week 5 assignment at University of Washington***
 
 ### Instructions:
